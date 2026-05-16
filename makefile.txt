@@ -1,0 +1,14 @@
+
+all: com sim run_dve
+
+com:
+	csh	vcs_run_lk.sh
+
+sim:
+	./simv -l sim.log
+
+run_dve:
+	dve -full64 -vpd vcdplus.vpd &
+
+clean:
+	rm -rf simv simv.daidir csrc *.log *.key *.vpd DVEfiles ucli.key

@@ -1,0 +1,3 @@
+wvCreateWindow
+wvSetPosition -win $_nWave2 {("G1" 0)}
+wvOpenFile -win $_nWave2 {/home/ICer/vcs_verdi_test/vcs/tb.fsdb}

@@ -7,8 +7,8 @@ set nc_def = ""
 # 这个变量后面用于 VCS 的 +define+ 选项，表示 Verilog 编译宏定义
 # 如果写成 set nc_def = "SIM"，后面就会变成 +define+SIM
 
-set flist = "./flist.f" ;
-# 定义变量 flist，表示源文件列表文件是 ./flist.f
+set flist = "./file_list.f" ;
+# 定义变量 flist，表示源文件列表文件是 ./file_list.f
 # VCS 后面会通过 -f $flist 读取这个文件中的 Verilog/SystemVerilog 文件路径
 
 set notiming = "+nospecify";
@@ -17,8 +17,7 @@ set notiming = "+nospecify";
 # 常用于 RTL 仿真，避免进行 specify 路径延迟和时序检查
 
 vcs -full64 \
-# 调用 VCS 编译器
-# -full64 表示使用 64 位模式运行 VCS
+
 
 -debug_access+all \
 # 开启完整调试访问权限

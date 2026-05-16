@@ -1,0 +1,24 @@
+*design* DebussyLib (btIdent Verdi_O-2018.09-SP2)
+Command arguments:
+    +define+verilog
+    -f file_list.f
+        ../sky/18/bin2bcd/pattern/tb.v
+        ../sky/18/bin2bcd/pattern/bin2bcd_model.v
+        ../sky/18/bin2bcd/rtl/bin2bcd.v
+    -2001
+    -
+*Warning* Unknown argument -
+
+    top
+    tb
+
+
+*Error* failed to open source file "top" with read access: No such file or directory
+
+
+*Error* failed to open source file "tb" with read access: No such file or directory
+
+Highest level modules:
+tb
+
+Total	2 error(s),   1 warning(s)
