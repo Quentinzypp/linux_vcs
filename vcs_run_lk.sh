@@ -1,8 +1,29 @@
 #!/bin/csh -f
 
-set nc_def = ""
-set flist = "./file_list.f"
+# ========================
+# Project configuration
+# ========================
+set top         = "tb"
+set flist       = "./file_list.f"
+set simv        = "simv"
+set compile_log = "vcs.log"
+
+# Disable specify block timing checks for RTL simulation.
 set notiming = "+nospecify"
+
+# Optional compile-time macro. Leave empty when no macro is required.
+set nc_def = ""
+set define_opt = ""
+if ("$nc_def" != "") then
+  set define_opt = "+define+$nc_def"
+endif
+
+if (! -e $flist) then
+  echo "@@@ RTL Compile FAILED: file list not found: $flist"
+  exit 1
+endif
+
+echo "@@@ VCS compile start: top=$top, filelist=$flist"
 
 vcs -full64 \
   -debug_access+all \
@@ -20,15 +41,25 @@ vcs -full64 \
   +neg_tchk \
   +memcbk \
   +sdfverbose \
-  +define+$nc_def \
+  $define_opt \
   +warn=all \
   +warn=noTFIPC \
   $notiming \
   +warn=noWSUM \
-  -l vcs.log \
+  -top $top \
+  -o $simv \
+  -l $compile_log \
   -f $flist
 
 if ($status != 0) then
-  echo "`t@@@ RTL Compile FAILED"
+  echo "@@@ RTL Compile FAILED: see $compile_log"
   exit 1
 endif
+
+if (! -x $simv) then
+  echo "@@@ RTL Compile FAILED: executable was not generated: $simv"
+  exit 1
+endif
+
+echo "@@@ RTL Compile PASSED: top=$top, executable=$simv"
+exit 0
